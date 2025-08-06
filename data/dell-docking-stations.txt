@@ -1,0 +1,469 @@
+# Dell Docking Stations - Technical Specifications
+# Document ID: DELL-DOC-DS2025-REV1.3
+# Publication Date: August 6, 2025
+# Manufacturer: Dell Technologies, Inc.
+
+## COMPATIBILITY NOTICE FOR DELL PRO MAX 14 PREMIUM (MA14250)
+
+The Dell Pro Max 14 Premium (MA14250) features the following ports:
+- Two USB Type-C Thunderbolt 5 ports (up to 120 Gbps) with Power Delivery and DisplayPort 2.1
+- Two USB Type-C Thunderbolt 4 ports (40 Gbps) with Power Delivery and DisplayPort 2.1
+- One global headset port
+- One microSD-card slot
+- One USB Type-C power-adapter port
+- One wedge-shaped lock slot
+
+Please refer to the compatibility table below for each docking station model.
+
+## DELL THUNDERBOLT DOCK WD22TB4
+### Model: WD22TB4 | Regulatory Model: K20A | Regulatory Type: K20A001
+### Compatibility: COMPATIBLE with Dell Pro Max 14 Premium (MA14250) - Thunderbolt 4 ports only
+
+The Dell Thunderbolt Dock WD22TB4 is a premium docking solution designed for Dell laptops and mobile workstations equipped with Thunderbolt 4, Thunderbolt 3, USB-C, or USB4 ports. This dock delivers exceptional connectivity and power delivery in a compact form factor.
+
+#### TECHNICAL SPECIFICATIONS:
+
+**Power Delivery:**
+- Up to 130W power delivery to compatible Dell systems
+- 90W standard power delivery to non-Dell systems via USB-PD
+- 5V/3A (15W) charging for mobile devices on USB-A ports
+
+**Video Outputs:**
+- 2x DisplayPort 1.4
+- 1x HDMI 2.0
+- 1x Thunderbolt 4 downstream port (supports DisplayPort)
+- Maximum resolution support:
+  * Single display: 8K @ 60Hz
+  * Dual displays: 4K @ 60Hz
+  * Triple displays: 4K @ 30Hz
+  * Quad displays: 1080p @ 60Hz
+
+**Data Ports:**
+- 1x Thunderbolt 4 upstream (host connection)
+- 1x Thunderbolt 4 downstream (40Gbps)
+- 3x USB-A 3.2 Gen 2 (10Gbps)
+- 1x USB-A 3.2 Gen 1 with PowerShare (5Gbps)
+- 1x USB-C 3.2 Gen 2 (10Gbps)
+
+**Network Connectivity:**
+- 2.5GbE RJ45 Ethernet port
+- Optional Intel Wi-Fi 6E module (sold separately)
+
+**Audio:**
+- 1x 3.5mm Audio Combo Jack (headset)
+- 1x 3.5mm Audio Line-Out
+
+**Security Features:**
+- Kensington lock slot
+- Noble Wedge lock slot
+- MAC address pass-through
+- Dell Security Manager compatibility
+- Wake-on-LAN support
+
+**Dimensions:**
+- Width: 205mm (8.07")
+- Depth: 90mm (3.54")
+- Height: 29mm (1.14")
+- Weight: 585g (1.29 lbs)
+
+**System Requirements:**
+- Compatible with Dell laptops featuring Thunderbolt 4, Thunderbolt 3, or USB-C with DisplayPort Alt Mode
+- Windows 10 (20H2 or later) or Windows 11
+- macOS 12.0 or later (limited functionality)
+
+**Warranty:**
+- 3-year Advanced Exchange Service
+
+**CAUTION:** Use only the power adapter provided with the dock. Using incompatible power adapters may damage the dock or connected devices.
+
+## DELL UNIVERSAL DOCK UD20
+
+### Model: UD20 | Regulatory Model: K19A | Regulatory Type: K19A002
+### Compatibility: NOT COMPATIBLE with Dell Pro Max 14 Premium (MA14250) - Insufficient bandwidth for Thunderbolt 5/4 ports
+
+The Dell Universal Dock UD20 provides essential connectivity for business professionals using USB-C enabled laptops. This dock offers a reliable connection to multiple peripherals through a single USB-C cable.
+
+#### TECHNICAL SPECIFICATIONS:
+
+**Power Delivery:**
+- Up to 90W power delivery to compatible systems
+- 60W standard power delivery to non-Dell systems via USB-PD
+
+**Video Outputs:**
+- 2x DisplayPort 1.4
+- 1x HDMI 2.0
+- Maximum resolution support:
+  * Single display: 4K @ 60Hz
+  * Dual displays: 4K @ 30Hz
+  * Triple displays: 1080p @ 60Hz
+
+**Data Ports:**
+- 1x USB-C upstream (host connection)
+- 1x USB-C 3.2 Gen 2 (10Gbps)
+- 3x USB-A 3.2 Gen 1 (5Gbps)
+- 1x USB-A 2.0 (480Mbps)
+
+**Network Connectivity:**
+- 1GbE RJ45 Ethernet port
+
+**Audio:**
+- 1x 3.5mm Audio Combo Jack
+
+**Security Features:**
+- Kensington lock slot
+- MAC address pass-through
+- Wake-on-LAN support
+
+**Dimensions:**
+- Width: 160mm (6.30")
+- Depth: 80mm (3.15")
+- Height: 27mm (1.06")
+- Weight: 420g (0.93 lbs)
+
+**System Requirements:**
+- Compatible with laptops featuring USB-C with DisplayPort Alt Mode
+- Windows 10 (1909 or later) or Windows 11
+- macOS 11.0 or later (limited functionality)
+
+**Warranty:**
+- 1-year Advanced Exchange Service
+
+**WARNING:** Do not expose the dock to water or excessive humidity. Liquid damage is not covered under warranty.
+
+## DELL PERFORMANCE DOCK WD19S
+
+### Model: WD19S | Regulatory Model: K20A | Regulatory Type: K20A003
+### Compatibility: NOT COMPATIBLE with Dell Pro Max 14 Premium (MA14250) - Lacks Thunderbolt support
+
+The Dell Performance Dock WD19S delivers reliable connectivity and power for business professionals. This dock is designed for maximum compatibility across Dell commercial laptops and mobile workstations.
+
+#### TECHNICAL SPECIFICATIONS:
+
+**Power Delivery:**
+- Up to 90W power delivery to compatible Dell systems
+- 65W standard power delivery to non-Dell systems via USB-PD
+
+**Video Outputs:**
+- 2x DisplayPort 1.4
+- 1x HDMI 2.0
+- 1x USB-C with DisplayPort Alt Mode
+- Maximum resolution support:
+  * Single display: 5K @ 60Hz
+  * Dual displays: 4K @ 60Hz
+  * Triple displays: 1080p @ 60Hz
+
+**Data Ports:**
+- 1x USB-C upstream (host connection)
+- 1x USB-C 3.2 Gen 2 (10Gbps)
+- 3x USB-A 3.2 Gen 1 (5Gbps)
+- 2x USB-A 2.0 (480Mbps)
+
+**Network Connectivity:**
+- 1GbE RJ45 Ethernet port
+
+**Audio:**
+- 1x 3.5mm Audio Combo Jack
+- 1x 3.5mm Audio Line-Out
+
+**Security Features:**
+- Kensington lock slot
+- Noble Wedge lock slot
+- MAC address pass-through
+- Wake-on-LAN support
+
+**Dimensions:**
+- Width: 200mm (7.87")
+- Depth: 72mm (2.83")
+- Height: 29mm (1.14")
+- Weight: 500g (1.10 lbs)
+
+**System Requirements:**
+- Compatible with laptops featuring USB-C with DisplayPort Alt Mode
+- Windows 10 (1809 or later) or Windows 11
+- macOS 11.0 or later (limited functionality)
+
+**Warranty:**
+- 3-year Advanced Exchange Service
+
+**PROCEDURE: Connecting to the WD19S Dock**
+1. Connect the power adapter to the dock
+2. Connect the USB-C cable to your laptop
+3. Connect your peripherals to the dock
+4. Power on your laptop
+5. Install Dell Dock Manager software if not automatically installed
+
+## DELL BUSINESS DOCK WD15
+
+### Model: WD15 | Regulatory Model: K17A | Regulatory Type: K17A001
+### Compatibility: NOT COMPATIBLE with Dell Pro Max 14 Premium (MA14250) - Legacy USB-C only, no Thunderbolt support
+
+The Dell Business Dock WD15 is a legacy docking solution for older Dell laptops equipped with USB-C ports. This dock provides essential connectivity for business applications.
+
+#### TECHNICAL SPECIFICATIONS:
+
+**Power Delivery:**
+- Up to 65W power delivery to compatible Dell systems
+- 45W standard power delivery to non-Dell systems via USB-PD
+
+**Video Outputs:**
+- 1x DisplayPort 1.2
+- 1x HDMI 1.4
+- 1x VGA
+- Maximum resolution support:
+  * Single display: 4K @ 30Hz
+  * Dual displays: 1080p @ 60Hz
+
+**Data Ports:**
+- 1x USB-C upstream (host connection)
+- 2x USB-A 3.0 (5Gbps)
+- 3x USB-A 2.0 (480Mbps)
+
+**Network Connectivity:**
+- 1GbE RJ45 Ethernet port
+
+**Audio:**
+- 1x 3.5mm Audio Combo Jack
+
+**Security Features:**
+- Kensington lock slot
+- MAC address pass-through
+
+**Dimensions:**
+- Width: 180mm (7.09")
+- Depth: 70mm (2.76")
+- Height: 25mm (0.98")
+- Weight: 380g (0.84 lbs)
+
+**System Requirements:**
+- Compatible with laptops featuring USB-C with DisplayPort Alt Mode
+- Windows 7, Windows 8.1, Windows 10, or Windows 11
+- macOS 10.13 or later (limited functionality)
+
+**Warranty:**
+- 1-year Advanced Exchange Service
+
+**CAUTION:** This dock has been discontinued and replaced by newer models. Limited driver support is available for newer operating systems.
+
+## DELL THUNDERBOLT DOCK TB16
+
+### Model: TB16 | Regulatory Model: K16A | Regulatory Type: K16A001
+### Compatibility: NOT COMPATIBLE with Dell Pro Max 14 Premium (MA14250) - Thunderbolt 3 only, not compatible with Thunderbolt 5
+
+The Dell Thunderbolt Dock TB16 is a legacy Thunderbolt 3 docking solution for Dell laptops and mobile workstations. This dock provides comprehensive connectivity options for professional applications.
+
+#### TECHNICAL SPECIFICATIONS:
+
+**Power Delivery:**
+- Up to 130W power delivery to compatible Dell systems
+- 60W standard power delivery to non-Dell systems via USB-PD
+
+**Video Outputs:**
+- 2x DisplayPort 1.2
+- 1x HDMI 1.4
+- 1x VGA
+- 1x Thunderbolt 3 (supports DisplayPort)
+- Maximum resolution support:
+  * Single display: 5K @ 60Hz
+  * Dual displays: 4K @ 60Hz
+  * Triple displays: 1080p @ 60Hz
+
+**Data Ports:**
+- 1x Thunderbolt 3 upstream (host connection)
+- 1x Thunderbolt 3 downstream (40Gbps)
+- 3x USB-A 3.0 (5Gbps)
+- 2x USB-A 2.0 (480Mbps)
+
+**Network Connectivity:**
+- 1GbE RJ45 Ethernet port
+
+**Audio:**
+- 1x 3.5mm Audio Combo Jack
+- 1x 3.5mm Audio Line-Out
+
+**Security Features:**
+- Kensington lock slot
+- Noble Wedge lock slot
+- MAC address pass-through
+- Wake-on-LAN support
+
+**Dimensions:**
+- Width: 145mm (5.71")
+- Depth: 145mm (5.71")
+- Height: 52mm (2.05")
+- Weight: 720g (1.59 lbs)
+
+**System Requirements:**
+- Compatible with Dell laptops featuring Thunderbolt 3
+- Windows 10 (1607 or later) or Windows 11
+- macOS 10.12 or later (limited functionality)
+
+**Warranty:**
+- 3-year Advanced Exchange Service
+
+**SPECIFICATIONS: Power Adapter**
+- Input: 100-240V AC, 50-60Hz
+- Output: 19.5V DC, 9.23A (180W)
+- Cable length: 1.8m (6 ft)
+
+**WARNING:** This dock has been discontinued. For optimal compatibility with newer systems, consider upgrading to the WD22TB4 Thunderbolt Dock.
+
+## DELL THUNDERBOLT 5 DOCK WD25TB5 (NEW)
+
+### Model: WD25TB5 | Regulatory Model: K22A | Regulatory Type: K22A001
+### Compatibility: FULLY COMPATIBLE with Dell Pro Max 14 Premium (MA14250)
+
+The Dell Thunderbolt 5 Dock WD25TB5 is Dell's latest premium docking solution designed specifically for systems with Thunderbolt 5 ports, including the Dell Pro Max 14 Premium. This dock delivers exceptional bandwidth, power delivery, and display capabilities.
+
+#### TECHNICAL SPECIFICATIONS:
+
+**Power Delivery:**
+- Up to 180W power delivery to compatible Dell systems
+- 140W standard power delivery to non-Dell systems via USB-PD
+- 7.5W wireless charging pad for mobile devices
+
+**Video Outputs:**
+- 2x DisplayPort 2.1
+- 1x HDMI 2.1
+- 1x Thunderbolt 5 downstream port (supports DisplayPort)
+- Maximum resolution support:
+  * Single display: 8K @ 120Hz
+  * Dual displays: 8K @ 60Hz
+  * Triple displays: 4K @ 120Hz
+  * Quad displays: 4K @ 60Hz
+
+**Data Ports:**
+- 1x Thunderbolt 5 upstream (host connection, 120Gbps)
+- 1x Thunderbolt 5 downstream (120Gbps)
+- 2x USB-A 3.2 Gen 2x2 (20Gbps)
+- 2x USB-A 3.2 Gen 2 (10Gbps)
+- 2x USB-C 3.2 Gen 2x2 (20Gbps)
+
+**Network Connectivity:**
+- 5GbE RJ45 Ethernet port
+- Wi-Fi 7 module (integrated)
+
+**Audio:**
+- 1x 3.5mm Audio Combo Jack (headset)
+- 1x 3.5mm Audio Line-Out
+
+**Security Features:**
+- Kensington lock slot
+- Noble Wedge lock slot
+- MAC address pass-through
+- Dell Security Manager compatibility
+- Wake-on-LAN support
+- Firmware TPM 2.0
+
+**Dimensions:**
+- Width: 210mm (8.27")
+- Depth: 95mm (3.74")
+- Height: 30mm (1.18")
+- Weight: 620g (1.37 lbs)
+
+**System Requirements:**
+- Compatible with laptops featuring Thunderbolt 5 or Thunderbolt 4
+- Windows 11 (22H2 or later)
+- macOS 14.0 or later (limited functionality)
+
+**Warranty:**
+- 3-year Advanced Exchange Service
+
+**PROCEDURE: Optimal Connection to Dell Pro Max 14 Premium**
+1. Connect the power adapter to the dock
+2. Connect the Thunderbolt 5 cable to one of the Thunderbolt 5 ports on your Dell Pro Max 14 Premium
+3. Connect your peripherals to the dock
+4. Power on your laptop
+5. Install Dell Dock Manager software from Dell Support website
+
+## DELL USB-C MOBILE ADAPTER DA300
+
+### Model: DA300 | Regulatory Model: K18A | Regulatory Type: K18A001
+### Compatibility: NOT COMPATIBLE with Dell Pro Max 14 Premium (MA14250) - Insufficient bandwidth, no Thunderbolt support
+
+The Dell USB-C Mobile Adapter DA300 is a compact, portable adapter designed for travelers who need essential connectivity on the go. This adapter is not compatible with the advanced features of the Dell Pro Max 14 Premium.
+
+#### TECHNICAL SPECIFICATIONS:
+
+**Power Delivery:**
+- No power delivery to host system
+- Bus-powered from host laptop
+
+**Video Outputs:**
+- 1x DisplayPort 1.2
+- 1x HDMI 1.4
+- 1x VGA
+- Maximum resolution support:
+  * Single display only: 4K @ 30Hz or 1080p @ 60Hz
+
+**Data Ports:**
+- 1x USB-C upstream (host connection)
+- 1x USB-A 3.0 (5Gbps)
+
+**Network Connectivity:**
+- 1GbE RJ45 Ethernet port
+
+**Dimensions:**
+- Diameter: 45mm (1.77")
+- Height: 12mm (0.47")
+- Weight: 80g (0.18 lbs)
+
+**System Requirements:**
+- Compatible with laptops featuring USB-C with DisplayPort Alt Mode
+- Windows 10 or Windows 11
+- macOS 10.14 or later
+
+**Warranty:**
+- 1-year Advanced Exchange Service
+
+**CAUTION:** This adapter is not compatible with Thunderbolt 5 or Thunderbolt 4 features of the Dell Pro Max 14 Premium. It will function only as a basic USB-C adapter with limited bandwidth and no power delivery.
+
+## DELL LEGACY PORT REPLICATOR PR02X
+
+### Model: PR02X | Regulatory Model: K15A | Regulatory Type: K15A001
+### Compatibility: INCOMPATIBLE with Dell Pro Max 14 Premium (MA14250) - Uses proprietary connector not present on Pro Max 14
+
+The Dell Legacy Port Replicator PR02X is designed for older Dell business laptops with proprietary docking connectors. This port replicator is completely incompatible with the Dell Pro Max 14 Premium as it lacks the required physical connector.
+
+#### TECHNICAL SPECIFICATIONS:
+
+**Power Delivery:**
+- Up to 90W power delivery via proprietary connector
+- No USB-C or Thunderbolt power delivery
+
+**Video Outputs:**
+- 1x DisplayPort 1.2
+- 1x DVI-D
+- 1x VGA
+- Maximum resolution support:
+  * Single display: 1080p @ 60Hz
+  * Dual displays: 1080p @ 30Hz
+
+**Data Ports:**
+- Proprietary docking connector (host connection)
+- 4x USB-A 2.0 (480Mbps)
+- 2x USB-A 3.0 (5Gbps)
+
+**Network Connectivity:**
+- 1GbE RJ45 Ethernet port
+
+**Audio:**
+- 1x 3.5mm Audio Combo Jack
+
+**Security Features:**
+- Kensington lock slot
+- Key lock mechanism
+
+**Dimensions:**
+- Width: 310mm (12.2")
+- Depth: 220mm (8.66")
+- Height: 40mm (1.57")
+- Weight: 950g (2.09 lbs)
+
+**System Requirements:**
+- Compatible only with Dell laptops with E-series docking connector
+- Windows 7, Windows 8.1, or Windows 10
+
+**Warranty:**
+- 1-year Advanced Exchange Service
+
+**WARNING:** This port replicator is physically incompatible with the Dell Pro Max 14 Premium. Attempting to force a connection will damage both devices.
