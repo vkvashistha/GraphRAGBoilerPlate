@@ -1,0 +1,230 @@
+from langchain_core.messages import AIMessage, SystemMessage
+from langchain_core.tools import tool
+from langchain_openai import ChatOpenAI
+from langgraph.checkpoint.memory import MemorySaver
+from langgraph.graph import END, START, StateGraph, add_messages
+from langgraph.prebuilt import ToolNode
+from graphiti_core import Graphiti
+from graphiti_core.edges import EntityEdge
+from dotenv import load_dotenv
+import os
+import asyncio
+from typing_extensions import TypedDict
+from typing import Annotated
+import uuid
+from graphiti_core.search.search_config_recipes import NODE_HYBRID_SEARCH_EPISODE_MENTIONS
+from graphiti_core.nodes import EpisodeType
+from datetime import datetime, timezone
+# from langchain.schema import HumanMessage, AIMessage, ToolMessage
+from langchain.schema import HumanMessage, AIMessage
+from langchain_core.messages import ToolMessage
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Neo4j connection parameters
+neo4j_uri = os.environ.get('NEO4J_URI', 'bolt://localhost:7687')
+neo4j_user = os.environ.get('NEO4J_USER', 'neo4j')
+neo4j_password = os.environ.get('NEO4J_PASSWORD', 'password')
+
+if not neo4j_uri or not neo4j_user or not neo4j_password:
+    raise ValueError('NEO4J_URI, NEO4J_USER, and NEO4J_PASSWORD must be set')
+
+client = Graphiti(neo4j_uri, neo4j_user, neo4j_password)
+
+def edges_to_facts_string(entities: list[EntityEdge]):
+    return '-' + '\n- '.join([edge.fact for edge in entities])
+
+@tool
+async def get_dell_data(query: str) -> str:
+    """Search the graphiti graph for information about Dell Pro Max 14 Premium laptop"""
+    edge_results = await client.search(
+        query,
+        # You can uncomment and use this if you have the dell_device_node_uuid
+        # center_node_uuid=dell_device_node_uuid,
+        num_results=10,
+    )
+    return edges_to_facts_string(edge_results)
+
+
+tools = [get_dell_data]
+tool_node = ToolNode(tools)
+
+# Get OpenAI API key from environment
+openai_api_key = os.environ.get('OPENAI_API_KEY')
+if not openai_api_key:
+    raise ValueError('OPENAI_API_KEY must be set in the .env file')
+
+# Initialize the LLM with the API key
+llm = ChatOpenAI(
+    model='gpt-4.1-mini',
+    temperature=0,
+    openai_api_key=openai_api_key
+).bind_tools(tools)
+
+# async def main():
+    
+#     # Test the tool node
+#     d = await tool_node.ainvoke({'messages': [await llm.ainvoke('Dell Pro Max 14 battery specifications')]})
+#     print(d)
+
+class State(TypedDict):
+    messages: Annotated[list, add_messages]
+    user_name: str
+    user_node_uuid: str
+
+
+async def chatbot(state: State):
+    facts_string = None
+    if len(state['messages']) > 0:
+        last_message = state['messages'][-1]
+        graphiti_query = f'{"SalesBot" if isinstance(last_message, AIMessage) else state["user_name"]}: {last_message.content}'
+        # search graphiti using Jess's node uuid as the center node
+        # graph edges (facts) further from the Jess node will be ranked lower
+        edge_results = await client.search(
+            graphiti_query, 
+            # center_node_uuid=state['user_node_uuid'], 
+            num_results=5
+        )
+        facts_string = edges_to_facts_string(edge_results)
+
+    # system_message = SystemMessage(
+    #     content=f"""You are a skillfull shoe salesperson working for ManyBirds. Review information about the user and their prior conversation below and respond accordingly.
+    #     Keep responses short and concise. And remember, always be selling (and helpful!)
+
+    #     Things you'll need to know about the user in order to close a sale:
+    #         - the user's shoe size
+    #     - any other shoe needs? maybe for wide feet?
+    #     - the user's preferred colors and styles
+    #     - their budget
+
+    #     Ensure that you ask the user for the above if you don't already know.
+
+    #     Facts about the user and their conversation:
+    #     {facts_string or 'No facts about the user and their conversation'}"""
+    # )
+
+    system_message = SystemMessage(
+        content=f"""You are a helpful, friendly assistant that answers user questions clearly and concisely.  
+
+            Review any prior context below to make your answer more useful.
+
+            Conversation context:
+            {facts_string or 'No prior conversation history'}
+            """
+        )
+
+    messages = [system_message] + state['messages']
+
+    response = await llm.ainvoke(messages)
+
+    # add the response to the graphiti graph.
+    # this will allow us to use the graphiti search later in the conversation
+    # we're doing async here to avoid blocking the graph execution
+    asyncio.create_task(
+        client.add_episode(
+            name='Chatbot Response',
+            episode_body=f'{state["user_name"]}: {state["messages"][-1]}\nBot: {response.content}',
+            source=EpisodeType.message,
+            reference_time=datetime.now(timezone.utc),
+            source_description='Chatbot',
+        )
+    )
+
+    return {'messages': [response]}
+
+
+graph_builder = StateGraph(State)
+
+memory = MemorySaver()
+
+
+# Define the function that determines whether to continue or not
+async def should_continue(state, config):
+    messages = state['messages']
+    last_message = messages[-1]
+    # If there is no function call, then we finish
+    if not last_message.tool_calls:
+        return 'end'
+    # Otherwise if there is, we continue
+    else:
+        return 'continue'
+
+
+graph_builder.add_node('agent', chatbot)
+graph_builder.add_node('tools', tool_node)
+
+graph_builder.add_edge(START, 'agent')
+graph_builder.add_conditional_edges('agent', should_continue, {'continue': 'tools', 'end': END})
+graph_builder.add_edge('tools', 'agent')
+
+graph = graph_builder.compile(checkpointer=memory)
+print(graph)
+
+async def main():
+    
+
+    user_name = 'jess'
+    print(user_name)
+
+    await client.add_episode(
+        name='User Creation',
+        episode_body=(f'{user_name} is interested in buying a Dell Pro Max 14 Premium laptop'),
+        source=EpisodeType.text,
+        reference_time=datetime.now(timezone.utc),
+        source_description='Dell Support Agent',
+    )
+
+    # let's get Jess's node uuid
+    nl = await client._search(user_name, NODE_HYBRID_SEARCH_EPISODE_MENTIONS)
+
+    user_node_uuid = nl.nodes[0].uuid
+
+    # # and the ManyBirds node uuid
+    # nl = await client._search('ManyBirds', NODE_HYBRID_SEARCH_EPISODE_MENTIONS)
+    # manybirds_node_uuid = nl.nodes[0].uuid
+    print(user_node_uuid)
+
+    ai_result = await graph.ainvoke(
+        {
+            'messages': [
+                {
+                    'role': 'user',
+                    'content': 'Dell Pro Max 14 battery specifications?',
+                }
+            ],
+            'user_name': user_name,
+            'user_node_uuid': user_node_uuid,
+        },
+        config={'configurable': {'thread_id': uuid.uuid4().hex}},
+    )
+
+    print(ai_result)
+    msgs = ai_result['messages']
+
+        # 1) The user question is your first HumanMessage
+
+    question = next(m for m in msgs if isinstance(m, HumanMessage)).content
+
+    # 2) The raw tool output is the first ToolMessage
+
+    search_results = next((m.content for m in msgs if isinstance(m, ToolMessage)), None)
+
+    # 3) The final AIMessage (after tool) is the last AIMessage
+
+    response = list(m for m in msgs if isinstance(m, AIMessage))[-1].content
+
+    print(f"\nQuestion:\n{question}\n")
+
+    print(f"Answer:\n{response}\n")
+
+    if search_results:
+
+        print(f"Search Results:\n{search_results}\n")
+
+    # 1) Close the Graphiti / Neo4j driver
+    await client.driver.close()
+
+# Run the async main function
+if __name__ == "__main__":
+    asyncio.run(main())
