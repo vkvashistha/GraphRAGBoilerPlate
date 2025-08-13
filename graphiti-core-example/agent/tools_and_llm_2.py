@@ -35,6 +35,22 @@ client = Graphiti(neo4j_uri, neo4j_user, neo4j_password)
 def edges_to_facts_string(entities: list[EntityEdge]):
     return '-' + '\n- '.join([edge.fact for edge in entities])
 
+async def get_user_chat_history(client: Graphiti, user_name: str, user_node_uuid: str = None) -> str:
+    """Retrieve user's past questions and conversation history from Graphiti"""
+    # Search for past user interactions and questions
+    history_query = f'{user_name} asked question Dell laptop specifications battery performance'
+    
+    edge_results = await client.search(
+        history_query,
+        center_node_uuid=user_node_uuid if user_node_uuid else None,
+        num_results=10  # Get more history for better context
+    )
+    
+    if edge_results:
+        return edges_to_facts_string(edge_results)
+    else:
+        return 'No previous conversation history found'
+
 @tool
 async def get_dell_data(query: str) -> str:
     """Search the graphiti graph for information about Dell Pro Max 14 Premium laptop"""
@@ -78,15 +94,13 @@ async def chatbot(state: State):
     facts_string = None
     if len(state['messages']) > 0:
         last_message = state['messages'][-1]
-        graphiti_query = f'{"SalesBot" if isinstance(last_message, AIMessage) else state["user_name"]}: {last_message.content}'
-        # search graphiti using Jess's node uuid as the center node
-        # graph edges (facts) further from the Jess node will be ranked lower
-        edge_results = await client.search(
-            graphiti_query, 
-            # center_node_uuid=state['user_node_uuid'], 
-            num_results=5
+        
+        # Get comprehensive chat history for the user
+        facts_string = await get_user_chat_history(
+            client, 
+            state['user_name'], 
+            state.get('user_node_uuid')
         )
-        facts_string = edges_to_facts_string(edge_results)
 
     # system_message = SystemMessage(
     #     content=f"""You are a skillfull shoe salesperson working for ManyBirds. Review information about the user and their prior conversation below and respond accordingly.
@@ -107,9 +121,11 @@ async def chatbot(state: State):
     system_message = SystemMessage(
         content=f"""You are a helpful, friendly assistant that answers user questions clearly and concisely.  
 
-            Review any prior context below to make your answer more useful.
+            Review the user's past questions and conversation history below to provide more contextual and helpful answers.
+            If the user has asked similar questions before, you can reference that context.
+            If this relates to previous conversations, acknowledge the continuity.
 
-            Conversation context:
+            User's conversation history:
             {facts_string or 'No prior conversation history'}
             """
         )
@@ -121,13 +137,29 @@ async def chatbot(state: State):
     # add the response to the graphiti graph.
     # this will allow us to use the graphiti search later in the conversation
     # we're doing async here to avoid blocking the graph execution
+    
+    # Store user question separately for better history tracking
+    if len(state['messages']) > 0:
+        last_message = state['messages'][-1]
+        if isinstance(last_message, HumanMessage):
+            asyncio.create_task(
+                client.add_episode(
+                    name='User Question',
+                    episode_body=f'{state["user_name"]} asked: {last_message.content}',
+                    source=EpisodeType.message,
+                    reference_time=datetime.now(timezone.utc),
+                    source_description='User Chat History',
+                )
+            )
+    
+    # Store the full conversation exchange
     asyncio.create_task(
         client.add_episode(
             name='Chatbot Response',
-            episode_body=f'{state["user_name"]}: {state["messages"][-1]}\nBot: {response.content}',
+            episode_body=f'{state["user_name"]}: {state["messages"][-1].content if hasattr(state["messages"][-1], "content") else str(state["messages"][-1])}\nBot: {response.content}',
             source=EpisodeType.message,
             reference_time=datetime.now(timezone.utc),
-            source_description='Chatbot',
+            source_description='Chatbot Conversation',
         )
     )
 
@@ -136,7 +168,7 @@ async def chatbot(state: State):
 
 graph_builder = StateGraph(State)
 
-memory = MemorySaver()
+# memory = MemorySaver()
 
 
 # Define the function that determines whether to continue or not
@@ -158,7 +190,8 @@ graph_builder.add_edge(START, 'agent')
 graph_builder.add_conditional_edges('agent', should_continue, {'continue': 'tools', 'end': END})
 graph_builder.add_edge('tools', 'agent')
 
-graph = graph_builder.compile(checkpointer=memory)
+# graph = graph_builder.compile(checkpointer=memory)
+graph = graph_builder.compile()
 print(graph)
 
 async def main():

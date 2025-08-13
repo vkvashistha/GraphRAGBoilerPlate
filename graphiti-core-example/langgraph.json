@@ -1,0 +1,14 @@
+{
+    "dependencies": [
+      "langchain_openai",
+      "langchain_core",
+      "graphiti_core",
+      "python-dotenv",
+      "."
+    ],
+    "graphs": {
+      "tools_and_llm_2": "./agent/tools_and_llm_2.py:graph"
+    },
+    "env": "./.env"
+  }
+  

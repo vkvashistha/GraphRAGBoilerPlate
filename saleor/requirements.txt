@@ -2,9 +2,9 @@ langchain-core>=0.1.0
 langchain>=0.0.335
 langchain-openai>=0.0.2
 langgraph>=0.0.20
-graphiti-core>=0.1.0
 python-dotenv>=1.0.0
-neo4j>=5.14.0
 typing-extensions>=4.7.0
-# langgraph-cli[inmem]==
+langchain-community
+gql
 
+httpx>=0.27.0

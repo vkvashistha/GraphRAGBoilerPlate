@@ -1,0 +1,13 @@
+{
+    "dependencies": [
+      "langchain_openai",
+      "langchain_core",
+      "python-dotenv",
+      "langgraph",
+      "."
+    ],
+    "graphs": {
+      "tools_and_llm_2": "./saleor_langgraph_graphqltool_agent.py:app"
+    },
+    "env": "./.env"
+  }
